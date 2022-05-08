@@ -6,10 +6,12 @@ public class Sogutucu implements ISogutucu{
 
 	private int altSicaklikSinir;
 	private int ustSicaklikSinir;
+	private Durumlar durum;
 	
 	public Sogutucu() {
 		ustSicaklikSinir = 21;
 		altSicaklikSinir = -4;
+		durum = Durumlar.Offline;
 	}
 	
 	public int getSicaklik() {
@@ -18,7 +20,10 @@ public class Sogutucu implements ISogutucu{
 	}
 
 	public void durumDegistir(Durumlar durum) {
-		return;
+		this.durum = durum; 
 	}
-
+	
+	public Durumlar getDurum() {
+		return this.durum;
+	}
 }
