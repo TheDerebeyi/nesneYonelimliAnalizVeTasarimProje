@@ -14,9 +14,27 @@ public class AnaIslemPlatformu {
 		agArayuzu = new AgArayuzu(veritabani);
 		sicaklikAlgilayici = new SicaklikAlgilayici();
 		sogutucu = new Sogutucu();
+		durum = Durumlar.Offline;
 	}
 
+	public boolean acilisTesti() {
+		if(eyleyici.getDurum() == Durumlar.Online && sicaklikAlgilayici.getDurum() == Durumlar.Online &&  agArayuzu.getDurum() == Durumlar.Online &&  sogutucu.getDurum() == Durumlar.Online) {
+			this.durum = Durumlar.Online;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	public void Basla() {
+		
+		if(!acilisTesti()) {
+			System.out.println(agArayuzu.getDurum());
+			System.out.println("Sistem baþlatýlamadý.");
+			System.exit(1);
+		}
+		
 		if (agArayuzu.girisYap()) {
 
 			while (true) {

@@ -6,10 +6,20 @@ public class AgArayuzu implements IAgArayuzu {
 	
 	private IVeritabani veritabani;
 	private Scanner scanner;
+	private Durumlar durum;
+	
+	public Durumlar getDurum() {
+		return durum;
+	}
+	
+	public void durumDegistir(Durumlar durum) {
+		this.durum = durum;
+	}
 	
 	public AgArayuzu(IVeritabani veritabani) {
 		this.veritabani = veritabani;
 		scanner = new Scanner(System.in);
+		durum = Durumlar.Online;
 	}
 
 	public boolean girisYap() {

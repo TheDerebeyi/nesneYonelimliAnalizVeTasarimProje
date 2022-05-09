@@ -1,5 +1,5 @@
 package nesneYonelimliAnalizVeTasarimProje;
 
 public enum Durumlar {
-	Bakimda, Online, Offline
+	ServisDisi, Online, Offline
 }

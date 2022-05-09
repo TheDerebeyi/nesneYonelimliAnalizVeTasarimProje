@@ -11,12 +11,12 @@ public class Sogutucu implements ISogutucu{
 	public Sogutucu() {
 		ustSicaklikSinir = 21;
 		altSicaklikSinir = -4;
-		durum = Durumlar.Offline;
+		durum = Durumlar.Online;
 	}
 	
 	public int getSicaklik() {
 		Random rand = new Random();
-		return rand.nextInt(ustSicaklikSinir)-altSicaklikSinir;
+		return rand.nextInt(ustSicaklikSinir)+altSicaklikSinir;
 	}
 
 	public void durumDegistir(Durumlar durum) {
