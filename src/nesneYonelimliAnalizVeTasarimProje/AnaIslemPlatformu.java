@@ -15,21 +15,24 @@ public class AnaIslemPlatformu {
 		sicaklikAlgilayici = new SicaklikAlgilayici();
 		sogutucu = new Sogutucu();
 	}
-	
+
 	public void Basla() {
-		switch(agArayuzu.menu()) {
-		case SicaklikOlc:
-			System.out.println("Mevcut sýcaklýk: " + sicaklikAlgilayici.sicaklikOku(sogutucu));
-			break;
-		case SogutucuAc:
-			eyleyici.sogutucuAc(sogutucu);
-			break;
-		case SogutucuKapat:
-			eyleyici.sogutucuKapat(sogutucu);
-			break;
+		if (agArayuzu.girisYap()) {
+
+			while (true) {
+				switch (agArayuzu.menu()) {
+				case SicaklikOlc:
+					System.out.println("Mevcut sýcaklýk: " + sicaklikAlgilayici.sicaklikOku(sogutucu));
+					break;
+				case SogutucuAc:
+					eyleyici.sogutucuAc(sogutucu);
+					break;
+				case SogutucuKapat:
+					eyleyici.sogutucuKapat(sogutucu);
+					break;
+				}
+			}
 		}
-		
-		Basla();
 	}
 
 }

@@ -5,14 +5,15 @@ import java.util.Scanner;
 public class AgArayuzu implements IAgArayuzu {
 	
 	private IVeritabani veritabani;
+	private Scanner scanner;
 	
 	public AgArayuzu(IVeritabani veritabani) {
 		this.veritabani = veritabani;
+		scanner = new Scanner(System.in);
 	}
 
-	public MenuReturn menu() {
+	public boolean girisYap() {
 		Kullanici kullanici;
-		Scanner scanner = new Scanner(System.in);
 		String input;
 
 		System.out.print("Giriþ yapýnýz\n");
@@ -36,7 +37,14 @@ public class AgArayuzu implements IAgArayuzu {
 			System.out.print("Sifre yanlýþ lütfen tekrar giriniz: ");
 			input = scanner.nextLine();
 		}
-
+		
+		return true;
+	}
+	
+	public MenuReturn menu() {
+		Scanner scanner = new Scanner(System.in);
+		String input;
+		
 		System.out.println("Menüden bir iþlem seçiniz:\n" + "1- Sýcaklýðý görüntüle\n" + "2- Soðutucuyu aç\n"
 				+ "3- Soðutucuyu kapat\n" + "0- Çýkýþ\n" + "Seçiminiz: ");
 		input = scanner.nextLine();
@@ -54,6 +62,8 @@ public class AgArayuzu implements IAgArayuzu {
 		case "3":
 			return MenuReturn.SogutucuKapat;	
 		}
+		scanner.close();
+		System.exit(0);
 		return null;
 	}
 }
