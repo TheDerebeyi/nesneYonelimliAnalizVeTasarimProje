@@ -14,9 +14,7 @@ public class PostgreSQLSurucu implements IVeritabani{
 	static Connection Baglan() {
 		try {
 			conn = DriverManager.getConnection(dburl, "postgres", "123456");
-			if (conn != null)
-				System.out.println("Baglanti Gerceklesti");
-			else
+			if (conn == null)
 				System.out.println("Baglanti Basarisiz");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -26,9 +24,39 @@ public class PostgreSQLSurucu implements IVeritabani{
 	}
 	
 	public Kullanici kullaniciKontrol(String kullaniciAdi) {
-		String sql = "SELECT * FROM \"public\".\"nesneyonelimveritabani\"";
+		String sql = "SELECT * FROM \"public\".\"Kullanici\"";
 		String isim = null;
+		boolean bulunduMu = false;
 
+		Connection conn = Baglan();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+
+			conn.close();
+			
+			while (rs.next()) {
+				if(rs.getString("kullaniciAdi").equals(kullaniciAdi)) {
+					isim = kullaniciAdi;
+					bulunduMu = true;
+				}
+			}
+			
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(!bulunduMu) return null;
+		
+		return new Kullanici(isim);
+
+	}
+	
+	public boolean sifreKontrol(Kullanici kullanici, String sifre) {
+		String sql = "SELECT * FROM \"public\".\"Kullanici\" WHERE \"kullaniciAdi\" = '"+ kullanici.kullaniciAdi +"'";
+		String dbSifre = null;
 
 		Connection conn = Baglan();
 		try {
@@ -38,7 +66,7 @@ public class PostgreSQLSurucu implements IVeritabani{
 			conn.close();
 
 			while (rs.next()) {
-				isim = rs.getString("ad");
+				dbSifre = rs.getString("sifre");
 			}
 			rs.close();
 			stmt.close();
@@ -46,33 +74,7 @@ public class PostgreSQLSurucu implements IVeritabani{
 			e.printStackTrace();
 		}
 		
-		return (isim.equals(kullaniciAdi)?new Kullanici(isim):null);
-
-	}
-	
-	public boolean sifreKontrol(Kullanici kullanici, String sifre) {
-		String sql = "SELECT * FROM \"public\".\"nesneyonelimveritabani\"";
-		String dbSifre = null;
-		String isim = null;
-
-		Connection conn = Baglan();
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-
-			conn.close();
-
-			while (rs.next()) {
-				isim = rs.getString("kullaniciAdi");
-				sifre = rs.getString("sifre");
-			}
-			rs.close();
-			stmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return isim.equals(kullanici.kullaniciAdi) && sifre.equals(sifre);
-
+		return dbSifre.equals(sifre);
 	}
 
 }
