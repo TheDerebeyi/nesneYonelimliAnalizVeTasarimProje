@@ -63,7 +63,7 @@ public class PostgreSQLSurucu implements IVeritabani{
 			conn.close();
 
 			while (rs.next()) {
-				isim = rs.getString("ad");
+				isim = rs.getString("kullaniciAdi");
 				sifre = rs.getString("sifre");
 			}
 			rs.close();
