@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-public class Veritabani {
+public class PostgreSQLSurucu implements IVeritabani{
 	static String dburl = "jdbc:postgresql://localhost:5432/nesneyonelimveritabani";
 	static Connection conn = null;
 
-	static void baglan() {
+	static Connection Baglan() {
 		try {
 			conn = DriverManager.getConnection(dburl, "postgres", "123456");
 			if (conn != null)
@@ -19,15 +21,41 @@ public class Veritabani {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return conn;
 
 	}
-
-	public boolean Kontrol(String KullaniciAdi, String Sifre) {
+	
+	public Kullanici kullaniciKontrol(String kullaniciAdi) {
 		String sql = "SELECT * FROM \"public\".\"nesneyonelimveritabani\"";
-		String isim = "";
-		String sifre = "";
+		String isim = null;
 
-		Connection conn = this.Baglan();
+
+		Connection conn = Baglan();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+
+			conn.close();
+
+			while (rs.next()) {
+				isim = rs.getString("ad");
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return (isim.equals(kullaniciAdi)?new Kullanici(isim):null);
+
+	}
+	
+	public boolean sifreKontrol(Kullanici kullanici, String sifre) {
+		String sql = "SELECT * FROM \"public\".\"nesneyonelimveritabani\"";
+		String dbSifre = null;
+		String isim = null;
+
+		Connection conn = Baglan();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
@@ -43,7 +71,7 @@ public class Veritabani {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return isim.equals(KullaniciAdi) && sifre.equals(Sifre);
+		return isim.equals(kullanici.kullaniciAdi) && sifre.equals(sifre);
 
 	}
 

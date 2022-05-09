@@ -6,10 +6,12 @@ public class AnaIslemPlatformu {
 	private ISicaklikAlgilayici sicaklikAlgilayici;
 	private Durumlar durum;
 	private ISogutucu sogutucu;
+	private IVeritabani veritabani;
 
 	public AnaIslemPlatformu() {
+		veritabani = new PostgreSQLSurucu();
 		eyleyici = new Eyleyici();
-		agArayuzu = new AgArayuzu();
+		agArayuzu = new AgArayuzu(veritabani);
 		sicaklikAlgilayici = new SicaklikAlgilayici();
 		sogutucu = new Sogutucu();
 	}

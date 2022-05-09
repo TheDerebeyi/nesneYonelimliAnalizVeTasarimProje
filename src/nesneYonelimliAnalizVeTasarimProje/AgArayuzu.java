@@ -3,9 +3,15 @@ package nesneYonelimliAnalizVeTasarimProje;
 import java.util.Scanner;
 
 public class AgArayuzu implements IAgArayuzu {
+	
+	private IVeritabani veritabani;
+	
+	public AgArayuzu(IVeritabani veritabani) {
+		this.veritabani = veritabani;
+	}
 
 	public MenuReturn menu() {
-
+		Kullanici kullanici;
 		Scanner scanner = new Scanner(System.in);
 		String input;
 
@@ -14,8 +20,10 @@ public class AgArayuzu implements IAgArayuzu {
 		System.out.print("Kullanýcý adý: ");
 
 		input = scanner.nextLine();
-
-		while (!kullaniciAdiDogrula(input)) {
+		
+		while (true) {
+			kullanici = veritabani.kullaniciKontrol(input);
+			if(kullanici != null) break;
 			System.out.print("Kullanýcý yanlýþ lütfen tekrar giriniz: ");
 
 			input = scanner.nextLine();
@@ -24,7 +32,7 @@ public class AgArayuzu implements IAgArayuzu {
 		System.out.print("Sifre: ");
 		input = scanner.nextLine();
 
-		while (!sifreDogrula(input)) {
+		while (!veritabani.sifreKontrol(kullanici, input)) {
 			System.out.print("Sifre yanlýþ lütfen tekrar giriniz: ");
 			input = scanner.nextLine();
 		}
@@ -47,13 +55,5 @@ public class AgArayuzu implements IAgArayuzu {
 			return MenuReturn.SogutucuKapat;	
 		}
 		return null;
-	}
-
-	private Boolean kullaniciAdiDogrula(String username) {
-		return true;
-	}
-
-	private Boolean sifreDogrula(String password) {
-		return true;
 	}
 }
