@@ -26,5 +26,8 @@ public class AnaIslemPlatformu {
 			eyleyici.sogutucuKapat(sogutucu);
 			break;
 		}
+		
+		Basla();
 	}
+
 }

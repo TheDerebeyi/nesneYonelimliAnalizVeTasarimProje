@@ -29,27 +29,24 @@ public class AgArayuzu implements IAgArayuzu {
 			input = scanner.nextLine();
 		}
 
-		do {
-			System.out.println("Menüden bir iþlem seçiniz:\n" + "1- Sýcaklýðý görüntüle\n" + "2- Soðutucuyu aç\n"
-					+ "3- Soðutucuyu kapat\n" + "0- Çýkýþ\n" + "Seçiminiz: ");
-			input = scanner.nextLine();
-			switch (input) {
-			case "0":
-				scanner.close();
-				System.exit(0);
-				break;
-			case "1":
-				return MenuReturn.SicaklikOlc;
+		System.out.println("Menüden bir iþlem seçiniz:\n" + "1- Sýcaklýðý görüntüle\n" + "2- Soðutucuyu aç\n"
+				+ "3- Soðutucuyu kapat\n" + "0- Çýkýþ\n" + "Seçiminiz: ");
+		input = scanner.nextLine();
+		switch (input) {
+		case "0":
+			scanner.close();
+			System.exit(0);
+			break;
+		case "1":
+			return MenuReturn.SicaklikOlc;
 
-			case "2":
-				return MenuReturn.SogutucuAc;
+		case "2":
+			return MenuReturn.SogutucuAc;
 
-			case "3":
-				return MenuReturn.SogutucuKapat;
-
-			}
-		} while (true);
-
+		case "3":
+			return MenuReturn.SogutucuKapat;	
+		}
+		return null;
 	}
 
 	private Boolean kullaniciAdiDogrula(String username) {
