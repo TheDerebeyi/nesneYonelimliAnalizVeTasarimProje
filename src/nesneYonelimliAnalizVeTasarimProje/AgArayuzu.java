@@ -2,11 +2,15 @@ package nesneYonelimliAnalizVeTasarimProje;
 
 import java.util.Scanner;
 
-public class AgArayuzu implements IAgArayuzu {
+public class AgArayuzu implements IAgArayuzu, IObserver{
 	
 	private IVeritabani veritabani;
 	private Scanner scanner;
 	private Durumlar durum;
+	
+	public void update(Durumlar durum) {
+		this.durum = durum;
+	}
 	
 	public Durumlar getDurum() {
 		return durum;

@@ -2,7 +2,7 @@ package nesneYonelimliAnalizVeTasarimProje;
 
 import java.util.Random;
 
-public class Sogutucu implements ISogutucu{
+public class Sogutucu implements ISogutucu, IObserver{
 
 	private int altSicaklikSinir;
 	private int ustSicaklikSinir;
@@ -12,6 +12,10 @@ public class Sogutucu implements ISogutucu{
 		ustSicaklikSinir = 21;
 		altSicaklikSinir = -4;
 		durum = Durumlar.Online;
+	}
+	
+	public void update(Durumlar durum) {
+		this.durum = durum;
 	}
 	
 	public int getSicaklik() {

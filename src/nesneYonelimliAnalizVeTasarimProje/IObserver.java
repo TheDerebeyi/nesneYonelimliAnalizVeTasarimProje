@@ -1,5 +1,5 @@
 package nesneYonelimliAnalizVeTasarimProje;
 
 public interface IObserver {
-	public void update();
+	public void update(Durumlar durum);
 }

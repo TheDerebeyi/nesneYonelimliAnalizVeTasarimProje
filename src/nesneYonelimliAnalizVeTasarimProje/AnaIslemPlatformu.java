@@ -7,6 +7,7 @@ public class AnaIslemPlatformu {
 	private Durumlar durum;
 	private ISogutucu sogutucu;
 	private IVeritabani veritabani;
+	private ISubject publisher;
 
 	public AnaIslemPlatformu() {
 		veritabani = new PostgreSQLSurucu();
@@ -15,6 +16,8 @@ public class AnaIslemPlatformu {
 		sicaklikAlgilayici = new SicaklikAlgilayici();
 		sogutucu = new Sogutucu();
 		durum = Durumlar.Offline;
+		publisher = new Publisher();
+		publisher.attach(eyleyici);
 	}
 
 	public boolean acilisTesti() {
@@ -25,6 +28,11 @@ public class AnaIslemPlatformu {
 		else {
 			return false;
 		}
+	}
+	
+	public void durumDegis(Durumlar durum) {
+		this.durum = durum;
+		publisher.notify(durum);
 	}
 	
 	public void Basla() {

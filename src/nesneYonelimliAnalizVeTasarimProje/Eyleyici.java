@@ -1,11 +1,15 @@
 package nesneYonelimliAnalizVeTasarimProje;
 
-public class Eyleyici implements IEyleyici{
+public class Eyleyici implements IEyleyici, IObserver{
 
 	private Durumlar durum;
 	
 	public Eyleyici() {
 		durum = Durumlar.Online;
+	}
+	
+	public void update(Durumlar durum) {
+		this.durum = durum;
 	}
 	
 	public Durumlar getDurum() {
