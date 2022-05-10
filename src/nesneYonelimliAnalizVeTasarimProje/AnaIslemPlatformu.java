@@ -17,7 +17,10 @@ public class AnaIslemPlatformu {
 		sogutucu = new Sogutucu();
 		durum = Durumlar.Offline;
 		publisher = new Publisher();
-		publisher.attach(eyleyici);
+		publisher.attach((Eyleyici)eyleyici);
+		publisher.attach((AgArayuzu)agArayuzu);
+		publisher.attach((SicaklikAlgilayici)sicaklikAlgilayici);
+		publisher.attach((Sogutucu)sogutucu);
 	}
 
 	public boolean acilisTesti() {
