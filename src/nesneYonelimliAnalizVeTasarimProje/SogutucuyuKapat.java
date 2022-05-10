@@ -1,11 +1,9 @@
 package nesneYonelimliAnalizVeTasarimProje;
 
 public class SogutucuyuKapat extends Islem{
-	public void IslemYap() {
+	public void IslemYap(ISogutucu sogutucu) {
 		sogutucu.durumDegistir(Durumlar.Offline);
 		System.out.println("Soðutucu baþarýyla kapatýldý.");
 	}
-	public SogutucuyuKapat(ISogutucu sogutucu) {
-		super(sogutucu);
-	}
+
 }

@@ -21,14 +21,14 @@ public class Eyleyici implements IEyleyici, IObserver{
 	}
 	
 	public void sogutucuAc(ISogutucu sogutucu) {
-		IIslemFactory islemFactory = new SogutucuyuAcFactory(sogutucu);
+		IIslemFactory islemFactory = new SogutucuyuAcFactory();
 		Islem islem = islemFactory.factoryMethod();
-		islem.IslemYap();
+		islem.IslemYap(sogutucu);
 	}
 
 	public void sogutucuKapat(ISogutucu sogutucu) {
-		IIslemFactory islemFactory = new SogutucuyuKapatFactory(sogutucu);
+		IIslemFactory islemFactory = new SogutucuyuKapatFactory();
 		Islem islem = islemFactory.factoryMethod();
-		islem.IslemYap();
+		islem.IslemYap(sogutucu);
 	}
 }

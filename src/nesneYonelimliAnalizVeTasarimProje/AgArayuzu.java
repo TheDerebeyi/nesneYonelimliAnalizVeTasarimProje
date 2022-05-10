@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class AgArayuzu implements IAgArayuzu, IObserver{
 	
-	private IVeritabani veritabani;
+
 	private Scanner scanner;
 	private Durumlar durum;
 	
@@ -20,13 +20,12 @@ public class AgArayuzu implements IAgArayuzu, IObserver{
 		this.durum = durum;
 	}
 	
-	public AgArayuzu(IVeritabani veritabani) {
-		this.veritabani = veritabani;
+	public AgArayuzu() {
 		scanner = new Scanner(System.in);
 		durum = Durumlar.Online;
 	}
 
-	public boolean girisYap() {
+	public boolean girisYap(IVeritabani veritabani) {
 		Kullanici kullanici;
 		String input;
 

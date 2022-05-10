@@ -12,7 +12,7 @@ public class AnaIslemPlatformu {
 	public AnaIslemPlatformu() {
 		veritabani = new PostgreSQLSurucu();
 		eyleyici = new Eyleyici();
-		agArayuzu = new AgArayuzu(veritabani);
+		agArayuzu = new AgArayuzu();
 		sicaklikAlgilayici = new SicaklikAlgilayici();
 		sogutucu = new Sogutucu();
 		durum = Durumlar.Offline;
@@ -46,7 +46,7 @@ public class AnaIslemPlatformu {
 			System.exit(1);
 		}
 		
-		if (agArayuzu.girisYap()) {
+		if (agArayuzu.girisYap(veritabani)) {
 
 			while (true) {
 				switch (agArayuzu.menu()) {
