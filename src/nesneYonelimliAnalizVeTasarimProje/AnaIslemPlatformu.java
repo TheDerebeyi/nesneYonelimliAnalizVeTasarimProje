@@ -38,7 +38,7 @@ public class AnaIslemPlatformu {
 		publisher.notify(durum);
 	}
 	
-	public void Basla() {
+	public void basla() {
 		
 		if(!acilisTesti()) {
 			System.out.println(agArayuzu.getDurum());
